@@ -5,10 +5,36 @@
 
 namespace FlightTracker
 {
+    using AlgernonCommons;
+    using AlgernonCommons.Translation;
+    using ICities;
+
     /// <summary>
     /// The base mod class for instantiation by the game.
     /// </summary>
-    public sealed class Mod
+    public sealed class Mod : OptionsMod<OptionsPanel>, IUserMod
     {
+        /// <summary>
+        /// Gets the mod's base display name (name only).
+        /// </summary>
+        public override string BaseName => "Flight Tracker";
+
+        /// <summary>
+        /// Gets the mod's description for display in the content manager.
+        /// </summary>
+        public string Description => Translations.Translate("MOD_DESCRIPTION");
+
+        /// <summary>
+        /// Saves settings file.
+        /// </summary>
+        public override void SaveSettings() => ModSettings.Save();
+
+        /// <summary>
+        /// Loads settings file.
+        /// </summary>
+        public override void LoadSettings()
+        {
+            ModSettings.Load();
+        }
     }
 }

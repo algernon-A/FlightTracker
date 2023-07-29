@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlightTracker", "FlightTracker.csproj", "{68A34C45-8C38-4022-9398-6F30EB187BCD}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AlgernonCommonsShared", "..\AlgernonCommons\AlgernonCommonsShared.shproj", "{25AEF446-6F0D-43A8-BB84-D1306789B68C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,5 +23,9 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {320788C6-6E4D-4831-8A9F-B05201AA0126}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		..\AlgernonCommons\AlgernonCommonsShared.projitems*{25aef446-6f0d-43a8-bb84-d1306789b68c}*SharedItemsImports = 13
+		..\AlgernonCommons\AlgernonCommonsShared.projitems*{68a34c45-8c38-4022-9398-6f30eb187bcd}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal
