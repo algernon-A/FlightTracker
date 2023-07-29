@@ -12,7 +12,6 @@
 		<AssemblySearchPaths>
 			$(AssemblySearchPaths);
 			$(ManagedDLLPath);
-			$(MoveItPath)
 		</AssemblySearchPaths>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 	</PropertyGroup>
