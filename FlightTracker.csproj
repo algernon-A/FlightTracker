@@ -9,14 +9,12 @@
 		<Product>$(Title)</Product>
 		<Version>0.0.1</Version>
 		<ManagedDLLPath>$(MSBuildProgramFiles32)/Steam/steamapps/common/Cities_Skylines/Cities_Data/Managed</ManagedDLLPath>
-		<MoveItPath>$(MSBuildProgramFiles32)/Steam/steamapps/workshop/content/255710/1619685021</MoveItPath>
 		<AssemblySearchPaths>
 			$(AssemblySearchPaths);
 			$(ManagedDLLPath);
 			$(MoveItPath)
 		</AssemblySearchPaths>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<AllowUnsafeBlocks>True</AllowUnsafeBlocks>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
@@ -33,10 +31,6 @@
 	<ItemGroup>
 		<_Translations Include="$(ProjectDir)/Translations/*.csv" />
 		<_TranslationsCore Include="../AlgernonCommons/Translations/*.csv" />
-		<_Resources Include="$(ProjectDir)/Resources/*.*" />
-	</ItemGroup>
-	<ItemGroup>
-	  <_Translations Remove="Translations\en-EN.csv" />
 	</ItemGroup>
 	<Target Name="DeployToModDirectory" AfterTargets="Build">
 		<PropertyGroup>
