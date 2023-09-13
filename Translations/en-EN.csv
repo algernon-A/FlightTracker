@@ -1,3 +1,8 @@
 "LANGUAGE","English","Language name (in native language)."
 "MOD_DESCRIPTION","Identifies incoming and outbound aircraft","Mod description, visibile in content manager."
 "MOD_NAME","Flight Tracker","Mod name displayed in-game in tooltips and labels."
+"NONE","None","Flight status."
+"INCOMING","Incoming","Flight status."
+"LANDED","Landed","Flight status."
+"AT_GATE","At gate","Flight status."
+"DEPARTED","Departed","Flight status."

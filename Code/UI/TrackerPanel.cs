@@ -134,7 +134,7 @@ namespace FlightTracker
                 }
 
                 // Determine flight status for this vehicle.
-                FlightRowData.FlightStatus flightStatus = FlightRowData.FlightStatus.Arriving;
+                FlightRowData.FlightStatus flightStatus = FlightRowData.FlightStatus.Incoming;
                 ushort vehicleTarget = thisVehicle.m_targetBuilding;
                 if (vehicleTarget != 0)
                 {
@@ -157,7 +157,7 @@ namespace FlightTracker
                 }
 
                 // Check for 'landed' status for arriving flights.
-                if (flightStatus == FlightRowData.FlightStatus.Arriving && (thisVehicle.m_flags & Vehicle.Flags.Flying) == 0)
+                if (flightStatus == FlightRowData.FlightStatus.Incoming && (thisVehicle.m_flags & Vehicle.Flags.Flying) == 0)
                 {
                     // Exclude vehicles landed near map edge from being recorded as 'landed'.
                     Vector3 vehiclePos = thisVehicle.GetLastFramePosition();

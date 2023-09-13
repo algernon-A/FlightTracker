@@ -5,6 +5,7 @@
 
 namespace FlightTracker
 {
+    using AlgernonCommons.Translation;
     using AlgernonCommons.Utils;
 
     /// <summary>
@@ -44,7 +45,7 @@ namespace FlightTracker
             /// <summary>
             /// Flight is incoming.
             /// </summary>
-            Arriving,
+            Incoming,
 
             /// <summary>
             /// Flight is incoming and has landed.
@@ -83,15 +84,15 @@ namespace FlightTracker
                 {
                     default:
                     case FlightStatus.None:
-                        return "None";
-                    case FlightStatus.Arriving:
-                        return "Incoming";
+                        return Translations.Translate("NONE");
+                    case FlightStatus.Incoming:
+                        return Translations.Translate("INCOMING");
                     case FlightStatus.Landed:
-                        return "Landed";
+                        return Translations.Translate("LANDED");
                     case FlightStatus.AtGate:
-                        return "At gate";
+                        return Translations.Translate("AT_GATE");
                     case FlightStatus.Departed:
-                        return "Departed";
+                        return Translations.Translate("DEPARTED");
                 }
             }
         }
