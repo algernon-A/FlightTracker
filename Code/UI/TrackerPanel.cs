@@ -114,28 +114,32 @@ namespace FlightTracker
             // Local references.
             Building[] buildingBuffer = Singleton<BuildingManager>.instance.m_buildings.m_buffer;
             Vehicle[] vehicleBuffer = Singleton<VehicleManager>.instance.m_vehicles.m_buffer;
+            NetNode[] nodeBuffer = Singleton<NetManager>.instance.m_nodes.m_buffer;
 
             // Regenerate vehicle list.
             _tempList.Clear();
             ushort vehicleID = buildingBuffer[_buildingID].m_ownVehicles;
             while (vehicleID != 0)
             {
+                // Local reference.
+                ref Vehicle thisVehicle = ref vehicleBuffer[vehicleID];
+
                 // Only interested in passenger aircraft.
-                VehicleInfo vehicleInfo = vehicleBuffer[vehicleID].Info;
+                VehicleInfo vehicleInfo = thisVehicle.Info;
                 if (vehicleInfo == null || vehicleInfo.m_class.m_subService != ItemClass.SubService.PublicTransportPlane)
                 {
                     // Make sure that the next vehicle ID is assigned before continuing, otherwise there'll be an infinite loop.
-                    vehicleID = vehicleBuffer[vehicleID].m_nextOwnVehicle;
+                    vehicleID = thisVehicle.m_nextOwnVehicle;
                     continue;
                 }
 
                 // Determine flight status for this vehicle.
                 FlightRowData.FlightStatus flightStatus = FlightRowData.FlightStatus.Arriving;
-                ushort vehicleTarget = vehicleBuffer[vehicleID].m_targetBuilding;
+                ushort vehicleTarget = thisVehicle.m_targetBuilding;
                 if (vehicleTarget != 0)
                 {
                     // If vehicle target node is near map edge, then it's departing.
-                    Vector3 nodePos = Singleton<NetManager>.instance.m_nodes.m_buffer[vehicleTarget].m_position;
+                    Vector3 nodePos = nodeBuffer[vehicleTarget].m_position;
                     if (nodePos.x < -8500 || nodePos.x > 8500 || nodePos.z < -8500 || nodePos.z > 8500)
                     {
                         // Check to see if it's still at the gate.
@@ -153,11 +157,11 @@ namespace FlightTracker
                 }
 
                 // Check for 'landed' status for arriving flights.
-                if (flightStatus == FlightRowData.FlightStatus.Arriving && (vehicleBuffer[vehicleID].m_flags & Vehicle.Flags.Flying) == 0)
+                if (flightStatus == FlightRowData.FlightStatus.Arriving && (thisVehicle.m_flags & Vehicle.Flags.Flying) == 0)
                 {
                     // Exclude vehicles landed near map edge from being recorded as 'landed'.
-                    Vector3 vehiclePos = vehicleBuffer[vehicleID].GetLastFramePosition();
-                    if (!(vehiclePos.x < -8500 || vehiclePos.x > 8500 || vehiclePos.z < -8500 || vehiclePos.z > 8500))
+                    Vector3 vehiclePos = thisVehicle.GetLastFramePosition();
+                    if (vehiclePos.x > -8500 && vehiclePos.x < 8500 && vehiclePos.z > -8500 && vehiclePos.z < 8500)
                     {
                         flightStatus = FlightRowData.FlightStatus.Landed;
                     }
@@ -167,7 +171,7 @@ namespace FlightTracker
                 _tempList.Add(new FlightRowData(vehicleID, vehicleInfo, flightStatus));
 
                 // Next vehicle.
-                vehicleID = vehicleBuffer[vehicleID].m_nextOwnVehicle;
+                vehicleID = thisVehicle.m_nextOwnVehicle;
             }
 
             // Set display list items, without changing the display.
