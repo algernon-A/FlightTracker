@@ -14,10 +14,10 @@ namespace FlightTracker
     public class FlightRowData
     {
         // Vehicle info.
-        private ushort _vehicleID;
+        private readonly ushort _vehicleID;
+        private readonly FlightStatus _status;
         private VehicleInfo _vehicleInfo;
         private string _vehicleName;
-        private FlightStatus _status;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FlightRowData"/> class.
