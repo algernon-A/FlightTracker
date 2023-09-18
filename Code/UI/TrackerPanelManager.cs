@@ -5,69 +5,24 @@
 
 namespace FlightTracker
 {
-    using System;
     using AlgernonCommons;
+    using AlgernonCommons.UI;
     using ColossalFramework;
-    using ColossalFramework.UI;
-    using UnityEngine;
 
     /// <summary>
     /// Static class to manage the flight tracker panel.
     /// </summary>
     internal static class TrackerPanelManager
     {
-        // Instance references.
-        private static GameObject s_gameObject;
-        private static TrackerPanel s_panel;
-
-        /// <summary>
-        /// Gets the active panel instance.
-        /// </summary>
-        internal static TrackerPanel Panel => s_panel;
-
         /// <summary>
         /// Creates the panel object in-game and displays it.
         /// </summary>
-        internal static void Create()
-        {
-            try
-            {
-                // If no instance already set, create one.
-                if (s_gameObject == null)
-                {
-                    Logging.Message("creating FlightTrackerPanel");
-
-                    // Give it a unique name for easy finding with ModTools.
-                    s_gameObject = new GameObject("FlightTrackerPanel");
-                    s_gameObject.transform.parent = UIView.GetAView().transform;
-
-                    // Add panel and set parent transform.
-                    s_panel = s_gameObject.AddComponent<TrackerPanel>();
-
-                    // Show panel.
-                    Panel.Show();
-                }
-            }
-            catch (Exception e)
-            {
-                Logging.LogException(e, "exception creating FlightTrackerPanel");
-            }
-        }
+        internal static void Create() => StandalonePanelManager<TrackerPanel>.Create();
 
         /// <summary>
         /// Closes the panel by destroying the object (removing any ongoing UI overhead).
         /// </summary>
-        internal static void Close()
-        {
-            if (s_panel != null)
-            {
-                GameObject.Destroy(s_panel);
-                GameObject.Destroy(s_gameObject);
-
-                s_panel = null;
-                s_gameObject = null;
-            }
-        }
+        internal static void Close() => StandalonePanelManager<TrackerPanel>.Panel?.Close();
 
         /// <summary>
         /// Sets the target to the selected building, creating the panel if necessary.
@@ -76,13 +31,13 @@ namespace FlightTracker
         internal static void SetTarget(ushort buildingID)
         {
             // If no existing panel, create it.
-            if (s_panel == null)
+            if (!StandalonePanelManager<TrackerPanel>.Panel)
             {
                 Create();
             }
 
             // Set the target.
-            s_panel.SetTarget(buildingID);
+            StandalonePanelManager<TrackerPanel>.Panel.SetTarget(buildingID);
         }
 
         /// <summary>
