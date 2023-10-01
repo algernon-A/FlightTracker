@@ -1,0 +1,8 @@
+"LANGUAGE","한국어","Language name (in native language)."
+"MOD_DESCRIPTION","이착륙하는 비행기의 상태를 보여줍니다","Mod description, visibile in content manager."
+"MOD_NAME","Flight Tracker","Mod name displayed in-game in tooltips and labels."
+"NONE","없음","Flight status."
+"INCOMING","접근중","Flight status."
+"LANDED","착륙함","Flight status."
+"AT_GATE","게이트에 있음","Flight status."
+"DEPARTED","출발함","Flight status."
